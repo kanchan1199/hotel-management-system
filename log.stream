@@ -1,0 +1,4 @@
+data: {"id":15025,"ts":1770767815981,"type":"info","taskId":"4b1d109a-f65c-4dfc-834c-96e6f6b31ca6","task":"agent-custom:Git-Orchestrator-Agent","message":"```bash\n> cd /app/temp/p5bdab87b-723c-4712-a297-5a1882c1cab9/dcab6140-b073-40fa-83b6-72c5a758ff3b/2b28dfb4-7efa-48d7-af3b-c7ec5e8d3d14 && rm -f log.stream Git-Orchestrator-Agent_agent_prompts.md\n\n```\n\n","params":{}}
+
+data: {"id":15026,"ts":1770767819880,"type":"info","taskId":"4b1d109a-f65c-4dfc-834c-96e6f6b31ca6","task":"agent-custom:Git-Orchestrator-Agent","message":"🛠️ Running command: `cd /app/temp/p5bdab87b-723c-4712-a297-5a1882c1cab9/dcab6140-b073-40fa-83b6-72c5a758ff3b/2b28dfb4-7efa-48d7-af3b-c7ec5e8d3d14 && git add -A && git commit --amend -m 'Initial commit: Hotel Management System Spring Boot Application'`","params":{}}
+

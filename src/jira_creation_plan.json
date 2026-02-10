@@ -1,0 +1,542 @@
+{
+  "project_key": "HMS",
+  "project_name": "Hotel Management System - Room Booking & Reservation Module",
+  "statistics": {
+    "features": 1,
+    "epics": 5,
+    "stories": 9,
+    "subtasks": 43,
+    "total": 58
+  },
+  "creation_plan": [
+    {
+      "level": "Feature",
+      "key": "HMS-FEATURE-001",
+      "summary": "Hotel Operations Digitalization - Room Booking & Reservation Module",
+      "description": "Allow hotel staff and guests to manage room availability, reservations, and guest stay lifecycle through a centralized Hotel Management System.",
+      "issue_type": "Feature",
+      "priority": "High",
+      "parent": null
+    },
+    {
+      "level": "Epic",
+      "key": "HMS-EPIC-001",
+      "summary": "User Access and Authentication",
+      "description": "Epic to handle user authentication and role-based access control for the Hotel Management System.",
+      "issue_type": "Epic",
+      "priority": "High",
+      "parent": "HMS-FEATURE-001"
+    },
+    {
+      "level": "Story",
+      "key": "HMS-101",
+      "summary": "User Login and Role-Based Access",
+      "description": "As a hotel staff member, I want to log in to the system with my credentials so that I can access booking operations based on my assigned role.\n\nAcceptance Criteria:\n- Users can log in with username and password\n- System validates credentials against user database\n- Admin users have full access to all booking operations\n- Front Desk Staff have access to reservation and check-in/check-out operations\n- Unauthorized users cannot access the system\n- Session timeout after 30 minutes of inactivity",
+      "issue_type": "Story",
+      "priority": "High",
+      "parent": "HMS-EPIC-001"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-101-ST1",
+      "summary": "Implement authentication API endpoint",
+      "description": "Create REST API endpoint for user login with JWT token generation",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-101"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-101-ST2",
+      "summary": "Implement role-based access control middleware",
+      "description": "Create middleware to validate user roles and permissions for different operations",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-101"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-101-ST3",
+      "summary": "Write unit tests for authentication logic",
+      "description": "Create JUnit tests for authentication service and role validation",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-101"
+    },
+    {
+      "level": "Epic",
+      "key": "HMS-EPIC-002",
+      "summary": "Room Availability and Reservation Management",
+      "description": "Epic to manage room availability display, reservation creation, and availability validation.",
+      "issue_type": "Epic",
+      "priority": "High",
+      "parent": "HMS-FEATURE-001"
+    },
+    {
+      "level": "Story",
+      "key": "HMS-201",
+      "summary": "Real-Time Room Availability Display",
+      "description": "As a front desk staff member, I want to view real-time room availability based on check-in and check-out dates so that I can quickly identify available rooms for guests.\n\nAcceptance Criteria:\n- System displays all rooms with their current status (Available, Booked, Maintenance)\n- Users can filter rooms by check-in and check-out dates\n- Room availability updates in real-time when reservations are made or cancelled\n- Display shows room type, room number, and pricing\n- Rooms under maintenance are clearly marked and excluded from booking",
+      "issue_type": "Story",
+      "priority": "High",
+      "parent": "HMS-EPIC-002"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-201-ST1",
+      "summary": "Create room availability database schema",
+      "description": "Design and implement database tables for rooms, room types, and availability status",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-201"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-201-ST2",
+      "summary": "Implement room availability query service",
+      "description": "Create service to query available rooms based on date range and room status",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-201"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-201-ST3",
+      "summary": "Build room availability UI component",
+      "description": "Create frontend component to display room availability with filters",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-201"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-201-ST4",
+      "summary": "Write integration tests for availability service",
+      "description": "Create integration tests for room availability queries and filters",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-201"
+    },
+    {
+      "level": "Story",
+      "key": "HMS-202",
+      "summary": "Create Room Reservation",
+      "description": "As a front desk staff member, I want to create room reservations by selecting room type, stay duration, and entering guest details so that I can confirm bookings for guests.\n\nAcceptance Criteria:\n- Users can select room type from available options\n- Users can specify check-in and check-out dates\n- System captures guest details (name, contact, ID proof)\n- System assigns available room of selected type\n- Confirmation number is generated upon successful reservation\n- Reservation details are stored in the database\n- Email confirmation is sent to guest",
+      "issue_type": "Story",
+      "priority": "High",
+      "parent": "HMS-EPIC-002"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-202-ST1",
+      "summary": "Create reservation database schema",
+      "description": "Design and implement database tables for reservations and guest information",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-202"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-202-ST2",
+      "summary": "Implement reservation creation API",
+      "description": "Create REST API endpoint to handle reservation creation with validation",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-202"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-202-ST3",
+      "summary": "Build reservation form UI",
+      "description": "Create frontend form for capturing reservation and guest details",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-202"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-202-ST4",
+      "summary": "Implement confirmation number generator",
+      "description": "Create service to generate unique confirmation numbers for reservations",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-202"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-202-ST5",
+      "summary": "Integrate email notification service",
+      "description": "Implement email service to send reservation confirmations to guests",
+      "issue_type": "Sub-task",
+      "priority": "Low",
+      "parent": "HMS-202"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-202-ST6",
+      "summary": "Write unit tests for reservation logic",
+      "description": "Create JUnit tests for reservation creation and validation",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-202"
+    },
+    {
+      "level": "Story",
+      "key": "HMS-203",
+      "summary": "Reservation Availability Validation",
+      "description": "As a system, I want to prevent double bookings by validating room availability before confirming reservations so that rooms are not overbooked.\n\nAcceptance Criteria:\n- System checks room availability before accepting reservation\n- Prevents booking of rooms already reserved for overlapping dates\n- Prevents booking of rooms marked as under maintenance\n- Displays clear error message when room is unavailable\n- Locks room during reservation process to prevent race conditions\n- Validates check-in date is not in the past",
+      "issue_type": "Story",
+      "priority": "High",
+      "parent": "HMS-EPIC-002"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-203-ST1",
+      "summary": "Implement availability validation logic",
+      "description": "Create service to validate room availability for date range with overlap detection",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-203"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-203-ST2",
+      "summary": "Implement room locking mechanism",
+      "description": "Create database locking mechanism to prevent concurrent booking conflicts",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-203"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-203-ST3",
+      "summary": "Add maintenance status validation",
+      "description": "Implement validation to prevent booking of rooms under maintenance",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-203"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-203-ST4",
+      "summary": "Write unit tests for validation logic",
+      "description": "Create comprehensive JUnit tests for all validation scenarios",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-203"
+    },
+    {
+      "level": "Epic",
+      "key": "HMS-EPIC-003",
+      "summary": "Guest Check-In and Check-Out Operations",
+      "description": "Epic to handle guest check-in and check-out processes with automatic room status updates.",
+      "issue_type": "Epic",
+      "priority": "High",
+      "parent": "HMS-FEATURE-001"
+    },
+    {
+      "level": "Story",
+      "key": "HMS-301",
+      "summary": "Guest Check-In Process",
+      "description": "As a front desk staff member, I want to check in guests with confirmed reservations so that their room status is updated and they can access their room.\n\nAcceptance Criteria:\n- Staff can search reservations by confirmation number or guest name\n- System verifies guest identity and reservation details\n- Cannot check in before reservation start date\n- Room status automatically changes from 'Reserved' to 'Occupied'\n- Check-in time is recorded in the system\n- Guest receives room key/access card information\n- System displays any special requests or notes for the reservation",
+      "issue_type": "Story",
+      "priority": "High",
+      "parent": "HMS-EPIC-003"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-301-ST1",
+      "summary": "Create check-in API endpoint",
+      "description": "Implement REST API for guest check-in with reservation validation",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-301"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-301-ST2",
+      "summary": "Implement reservation search functionality",
+      "description": "Create service to search reservations by confirmation number or guest name",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-301"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-301-ST3",
+      "summary": "Build check-in UI interface",
+      "description": "Create frontend interface for check-in process with reservation lookup",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-301"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-301-ST4",
+      "summary": "Implement room status update service",
+      "description": "Create service to automatically update room status during check-in",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-301"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-301-ST5",
+      "summary": "Write unit tests for check-in logic",
+      "description": "Create JUnit tests for check-in validation and status updates",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-301"
+    },
+    {
+      "level": "Story",
+      "key": "HMS-302",
+      "summary": "Guest Check-Out Process",
+      "description": "As a front desk staff member, I want to check out guests and settle their bills so that rooms become available for new reservations.\n\nAcceptance Criteria:\n- Staff can initiate check-out for occupied rooms\n- System calculates total bill including room charges and extras\n- Standard check-out time is 12:00 PM\n- Late check-out after 12:00 PM incurs additional charges\n- Room status automatically changes from 'Occupied' to 'Available'\n- Check-out time is recorded in the system\n- Final bill is generated and presented to guest\n- Payment must be settled before check-out completion",
+      "issue_type": "Story",
+      "priority": "High",
+      "parent": "HMS-EPIC-003"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-302-ST1",
+      "summary": "Create check-out API endpoint",
+      "description": "Implement REST API for guest check-out with bill calculation",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-302"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-302-ST2",
+      "summary": "Implement late check-out charge calculator",
+      "description": "Create service to calculate additional charges for late check-out",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-302"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-302-ST3",
+      "summary": "Build check-out UI interface",
+      "description": "Create frontend interface for check-out process with bill display",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-302"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-302-ST4",
+      "summary": "Implement room status cleanup service",
+      "description": "Create service to update room status to available after check-out",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-302"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-302-ST5",
+      "summary": "Write unit tests for check-out logic",
+      "description": "Create JUnit tests for check-out process and charge calculations",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-302"
+    },
+    {
+      "level": "Epic",
+      "key": "HMS-EPIC-004",
+      "summary": "Billing and Payment Management",
+      "description": "Epic to handle billing calculations, payment processing, and record keeping.",
+      "issue_type": "Epic",
+      "priority": "High",
+      "parent": "HMS-FEATURE-001"
+    },
+    {
+      "level": "Story",
+      "key": "HMS-401",
+      "summary": "Automatic Billing Calculation",
+      "description": "As a system, I want to automatically calculate the total stay cost based on room type, duration, and additional services so that accurate bills are generated.\n\nAcceptance Criteria:\n- System calculates room charges based on room type and number of nights\n- System includes additional service charges (room service, minibar, etc.)\n- System applies applicable taxes\n- System calculates late check-out charges if applicable\n- Bill breakdown shows itemized charges\n- Total amount is clearly displayed\n- Bill is generated in printable format",
+      "issue_type": "Story",
+      "priority": "High",
+      "parent": "HMS-EPIC-004"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-401-ST1",
+      "summary": "Create billing database schema",
+      "description": "Design and implement database tables for billing and charges",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-401"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-401-ST2",
+      "summary": "Implement billing calculation engine",
+      "description": "Create service to calculate total charges including room, services, and taxes",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-401"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-401-ST3",
+      "summary": "Build bill generation service",
+      "description": "Create service to generate itemized bills in printable format",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-401"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-401-ST4",
+      "summary": "Write unit tests for billing calculations",
+      "description": "Create JUnit tests for all billing calculation scenarios",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-401"
+    },
+    {
+      "level": "Story",
+      "key": "HMS-402",
+      "summary": "Payment Processing and Recording",
+      "description": "As a front desk staff member, I want to record guest payments with payment method and status so that all financial transactions are tracked.\n\nAcceptance Criteria:\n- System supports multiple payment methods (Cash, Credit Card, Debit Card, UPI)\n- Staff can record payment amount and method\n- System validates payment amount matches bill total\n- Payment status is updated (Paid, Partial, Pending)\n- Payment receipt is generated\n- All payment records are stored for audit purposes\n- Payment timestamp is recorded",
+      "issue_type": "Story",
+      "priority": "High",
+      "parent": "HMS-EPIC-004"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-402-ST1",
+      "summary": "Create payment database schema",
+      "description": "Design and implement database tables for payment records",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-402"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-402-ST2",
+      "summary": "Implement payment recording API",
+      "description": "Create REST API endpoint to record payment details and status",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-402"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-402-ST3",
+      "summary": "Build payment processing UI",
+      "description": "Create frontend interface for recording payments with method selection",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-402"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-402-ST4",
+      "summary": "Implement receipt generation service",
+      "description": "Create service to generate payment receipts",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-402"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-402-ST5",
+      "summary": "Write unit tests for payment logic",
+      "description": "Create JUnit tests for payment recording and validation",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-402"
+    },
+    {
+      "level": "Epic",
+      "key": "HMS-EPIC-005",
+      "summary": "Reservation Cancellation Management",
+      "description": "Epic to handle reservation cancellations with policy-based charge calculations.",
+      "issue_type": "Epic",
+      "priority": "Medium",
+      "parent": "HMS-FEATURE-001"
+    },
+    {
+      "level": "Story",
+      "key": "HMS-501",
+      "summary": "Reservation Cancellation with Policy Enforcement",
+      "description": "As a front desk staff member, I want to cancel reservations and apply cancellation charges according to hotel policy so that cancellations are handled consistently.\n\nAcceptance Criteria:\n- Staff can search and select reservations to cancel\n- System displays cancellation policy and applicable charges\n- Cancellation charges are calculated based on time before check-in\n- Room status is updated to 'Available' after cancellation\n- Cancellation confirmation is generated\n- Refund amount is calculated (if applicable)\n- Cancellation record is maintained for audit\n- Email notification is sent to guest about cancellation",
+      "issue_type": "Story",
+      "priority": "Medium",
+      "parent": "HMS-EPIC-005"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-501-ST1",
+      "summary": "Create cancellation policy configuration",
+      "description": "Implement configurable cancellation policy rules and charge structure",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-501"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-501-ST2",
+      "summary": "Implement cancellation charge calculator",
+      "description": "Create service to calculate cancellation charges based on policy",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-501"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-501-ST3",
+      "summary": "Create cancellation API endpoint",
+      "description": "Implement REST API for reservation cancellation with charge calculation",
+      "issue_type": "Sub-task",
+      "priority": "High",
+      "parent": "HMS-501"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-501-ST4",
+      "summary": "Build cancellation UI interface",
+      "description": "Create frontend interface for cancellation with policy display",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-501"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-501-ST5",
+      "summary": "Implement refund calculation service",
+      "description": "Create service to calculate refund amounts after cancellation charges",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-501"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-501-ST6",
+      "summary": "Integrate cancellation email notification",
+      "description": "Implement email service to send cancellation confirmations",
+      "issue_type": "Sub-task",
+      "priority": "Low",
+      "parent": "HMS-501"
+    },
+    {
+      "level": "Sub-task",
+      "key": "HMS-501-ST7",
+      "summary": "Write unit tests for cancellation logic",
+      "description": "Create JUnit tests for cancellation and charge calculations",
+      "issue_type": "Sub-task",
+      "priority": "Medium",
+      "parent": "HMS-501"
+    }
+  ],
+  "summary": "Successfully planned creation of 58 Jira issues:",
+  "breakdown": [
+    "- 1 Feature(s)",
+    "- 5 Epic(s)",
+    "- 9 Story/Stories",
+    "- 43 Sub-task(s)"
+  ]
+}

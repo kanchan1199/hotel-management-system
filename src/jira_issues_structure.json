@@ -1,0 +1,339 @@
+{
+  "project_key": "HMS",
+  "feature": {
+    "summary": "Hotel Operations Digitalization - Room Booking & Reservation Module",
+    "description": "Allow hotel staff and guests to manage room availability, reservations, and guest stay lifecycle through a centralized Hotel Management System.",
+    "issue_type": "Feature",
+    "priority": "High",
+    "feature_id": "REQ-HMS-2026",
+    "epics": [
+      {
+        "summary": "User Access and Authentication",
+        "description": "Epic to handle user authentication and role-based access control for the Hotel Management System.",
+        "issue_type": "Epic",
+        "priority": "High",
+        "stories": [
+          {
+            "summary": "User Login and Role-Based Access",
+            "description": "As a hotel staff member, I want to log in to the system with my credentials so that I can access booking operations based on my assigned role.\n\nAcceptance Criteria:\n- Users can log in with username and password\n- System validates credentials against user database\n- Admin users have full access to all booking operations\n- Front Desk Staff have access to reservation and check-in/check-out operations\n- Unauthorized users cannot access the system\n- Session timeout after 30 minutes of inactivity",
+            "issue_type": "Story",
+            "priority": "High",
+            "subtasks": [
+              {
+                "summary": "Implement authentication API endpoint",
+                "description": "Create REST API endpoint for user login with JWT token generation",
+                "priority": "High"
+              },
+              {
+                "summary": "Implement role-based access control middleware",
+                "description": "Create middleware to validate user roles and permissions for different operations",
+                "priority": "High"
+              },
+              {
+                "summary": "Write unit tests for authentication logic",
+                "description": "Create JUnit tests for authentication service and role validation",
+                "priority": "Medium"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "summary": "Room Availability and Reservation Management",
+        "description": "Epic to manage room availability display, reservation creation, and availability validation.",
+        "issue_type": "Epic",
+        "priority": "High",
+        "stories": [
+          {
+            "summary": "Real-Time Room Availability Display",
+            "description": "As a front desk staff member, I want to view real-time room availability based on check-in and check-out dates so that I can quickly identify available rooms for guests.\n\nAcceptance Criteria:\n- System displays all rooms with their current status (Available, Booked, Maintenance)\n- Users can filter rooms by check-in and check-out dates\n- Room availability updates in real-time when reservations are made or cancelled\n- Display shows room type, room number, and pricing\n- Rooms under maintenance are clearly marked and excluded from booking",
+            "issue_type": "Story",
+            "priority": "High",
+            "subtasks": [
+              {
+                "summary": "Create room availability database schema",
+                "description": "Design and implement database tables for rooms, room types, and availability status",
+                "priority": "High"
+              },
+              {
+                "summary": "Implement room availability query service",
+                "description": "Create service to query available rooms based on date range and room status",
+                "priority": "High"
+              },
+              {
+                "summary": "Build room availability UI component",
+                "description": "Create frontend component to display room availability with filters",
+                "priority": "Medium"
+              },
+              {
+                "summary": "Write integration tests for availability service",
+                "description": "Create integration tests for room availability queries and filters",
+                "priority": "Medium"
+              }
+            ]
+          },
+          {
+            "summary": "Create Room Reservation",
+            "description": "As a front desk staff member, I want to create room reservations by selecting room type, stay duration, and entering guest details so that I can confirm bookings for guests.\n\nAcceptance Criteria:\n- Users can select room type from available options\n- Users can specify check-in and check-out dates\n- System captures guest details (name, contact, ID proof)\n- System assigns available room of selected type\n- Confirmation number is generated upon successful reservation\n- Reservation details are stored in the database\n- Email confirmation is sent to guest",
+            "issue_type": "Story",
+            "priority": "High",
+            "subtasks": [
+              {
+                "summary": "Create reservation database schema",
+                "description": "Design and implement database tables for reservations and guest information",
+                "priority": "High"
+              },
+              {
+                "summary": "Implement reservation creation API",
+                "description": "Create REST API endpoint to handle reservation creation with validation",
+                "priority": "High"
+              },
+              {
+                "summary": "Build reservation form UI",
+                "description": "Create frontend form for capturing reservation and guest details",
+                "priority": "Medium"
+              },
+              {
+                "summary": "Implement confirmation number generator",
+                "description": "Create service to generate unique confirmation numbers for reservations",
+                "priority": "Medium"
+              },
+              {
+                "summary": "Integrate email notification service",
+                "description": "Implement email service to send reservation confirmations to guests",
+                "priority": "Low"
+              },
+              {
+                "summary": "Write unit tests for reservation logic",
+                "description": "Create JUnit tests for reservation creation and validation",
+                "priority": "Medium"
+              }
+            ]
+          },
+          {
+            "summary": "Reservation Availability Validation",
+            "description": "As a system, I want to prevent double bookings by validating room availability before confirming reservations so that rooms are not overbooked.\n\nAcceptance Criteria:\n- System checks room availability before accepting reservation\n- Prevents booking of rooms already reserved for overlapping dates\n- Prevents booking of rooms marked as under maintenance\n- Displays clear error message when room is unavailable\n- Locks room during reservation process to prevent race conditions\n- Validates check-in date is not in the past",
+            "issue_type": "Story",
+            "priority": "High",
+            "subtasks": [
+              {
+                "summary": "Implement availability validation logic",
+                "description": "Create service to validate room availability for date range with overlap detection",
+                "priority": "High"
+              },
+              {
+                "summary": "Implement room locking mechanism",
+                "description": "Create database locking mechanism to prevent concurrent booking conflicts",
+                "priority": "High"
+              },
+              {
+                "summary": "Add maintenance status validation",
+                "description": "Implement validation to prevent booking of rooms under maintenance",
+                "priority": "Medium"
+              },
+              {
+                "summary": "Write unit tests for validation logic",
+                "description": "Create comprehensive JUnit tests for all validation scenarios",
+                "priority": "Medium"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "summary": "Guest Check-In and Check-Out Operations",
+        "description": "Epic to handle guest check-in and check-out processes with automatic room status updates.",
+        "issue_type": "Epic",
+        "priority": "High",
+        "stories": [
+          {
+            "summary": "Guest Check-In Process",
+            "description": "As a front desk staff member, I want to check in guests with confirmed reservations so that their room status is updated and they can access their room.\n\nAcceptance Criteria:\n- Staff can search reservations by confirmation number or guest name\n- System verifies guest identity and reservation details\n- Cannot check in before reservation start date\n- Room status automatically changes from 'Reserved' to 'Occupied'\n- Check-in time is recorded in the system\n- Guest receives room key/access card information\n- System displays any special requests or notes for the reservation",
+            "issue_type": "Story",
+            "priority": "High",
+            "subtasks": [
+              {
+                "summary": "Create check-in API endpoint",
+                "description": "Implement REST API for guest check-in with reservation validation",
+                "priority": "High"
+              },
+              {
+                "summary": "Implement reservation search functionality",
+                "description": "Create service to search reservations by confirmation number or guest name",
+                "priority": "High"
+              },
+              {
+                "summary": "Build check-in UI interface",
+                "description": "Create frontend interface for check-in process with reservation lookup",
+                "priority": "Medium"
+              },
+              {
+                "summary": "Implement room status update service",
+                "description": "Create service to automatically update room status during check-in",
+                "priority": "High"
+              },
+              {
+                "summary": "Write unit tests for check-in logic",
+                "description": "Create JUnit tests for check-in validation and status updates",
+                "priority": "Medium"
+              }
+            ]
+          },
+          {
+            "summary": "Guest Check-Out Process",
+            "description": "As a front desk staff member, I want to check out guests and settle their bills so that rooms become available for new reservations.\n\nAcceptance Criteria:\n- Staff can initiate check-out for occupied rooms\n- System calculates total bill including room charges and extras\n- Standard check-out time is 12:00 PM\n- Late check-out after 12:00 PM incurs additional charges\n- Room status automatically changes from 'Occupied' to 'Available'\n- Check-out time is recorded in the system\n- Final bill is generated and presented to guest\n- Payment must be settled before check-out completion",
+            "issue_type": "Story",
+            "priority": "High",
+            "subtasks": [
+              {
+                "summary": "Create check-out API endpoint",
+                "description": "Implement REST API for guest check-out with bill calculation",
+                "priority": "High"
+              },
+              {
+                "summary": "Implement late check-out charge calculator",
+                "description": "Create service to calculate additional charges for late check-out",
+                "priority": "Medium"
+              },
+              {
+                "summary": "Build check-out UI interface",
+                "description": "Create frontend interface for check-out process with bill display",
+                "priority": "Medium"
+              },
+              {
+                "summary": "Implement room status cleanup service",
+                "description": "Create service to update room status to available after check-out",
+                "priority": "High"
+              },
+              {
+                "summary": "Write unit tests for check-out logic",
+                "description": "Create JUnit tests for check-out process and charge calculations",
+                "priority": "Medium"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "summary": "Billing and Payment Management",
+        "description": "Epic to handle billing calculations, payment processing, and record keeping.",
+        "issue_type": "Epic",
+        "priority": "High",
+        "stories": [
+          {
+            "summary": "Automatic Billing Calculation",
+            "description": "As a system, I want to automatically calculate the total stay cost based on room type, duration, and additional services so that accurate bills are generated.\n\nAcceptance Criteria:\n- System calculates room charges based on room type and number of nights\n- System includes additional service charges (room service, minibar, etc.)\n- System applies applicable taxes\n- System calculates late check-out charges if applicable\n- Bill breakdown shows itemized charges\n- Total amount is clearly displayed\n- Bill is generated in printable format",
+            "issue_type": "Story",
+            "priority": "High",
+            "subtasks": [
+              {
+                "summary": "Create billing database schema",
+                "description": "Design and implement database tables for billing and charges",
+                "priority": "High"
+              },
+              {
+                "summary": "Implement billing calculation engine",
+                "description": "Create service to calculate total charges including room, services, and taxes",
+                "priority": "High"
+              },
+              {
+                "summary": "Build bill generation service",
+                "description": "Create service to generate itemized bills in printable format",
+                "priority": "Medium"
+              },
+              {
+                "summary": "Write unit tests for billing calculations",
+                "description": "Create JUnit tests for all billing calculation scenarios",
+                "priority": "Medium"
+              }
+            ]
+          },
+          {
+            "summary": "Payment Processing and Recording",
+            "description": "As a front desk staff member, I want to record guest payments with payment method and status so that all financial transactions are tracked.\n\nAcceptance Criteria:\n- System supports multiple payment methods (Cash, Credit Card, Debit Card, UPI)\n- Staff can record payment amount and method\n- System validates payment amount matches bill total\n- Payment status is updated (Paid, Partial, Pending)\n- Payment receipt is generated\n- All payment records are stored for audit purposes\n- Payment timestamp is recorded",
+            "issue_type": "Story",
+            "priority": "High",
+            "subtasks": [
+              {
+                "summary": "Create payment database schema",
+                "description": "Design and implement database tables for payment records",
+                "priority": "High"
+              },
+              {
+                "summary": "Implement payment recording API",
+                "description": "Create REST API endpoint to record payment details and status",
+                "priority": "High"
+              },
+              {
+                "summary": "Build payment processing UI",
+                "description": "Create frontend interface for recording payments with method selection",
+                "priority": "Medium"
+              },
+              {
+                "summary": "Implement receipt generation service",
+                "description": "Create service to generate payment receipts",
+                "priority": "Medium"
+              },
+              {
+                "summary": "Write unit tests for payment logic",
+                "description": "Create JUnit tests for payment recording and validation",
+                "priority": "Medium"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "summary": "Reservation Cancellation Management",
+        "description": "Epic to handle reservation cancellations with policy-based charge calculations.",
+        "issue_type": "Epic",
+        "priority": "Medium",
+        "stories": [
+          {
+            "summary": "Reservation Cancellation with Policy Enforcement",
+            "description": "As a front desk staff member, I want to cancel reservations and apply cancellation charges according to hotel policy so that cancellations are handled consistently.\n\nAcceptance Criteria:\n- Staff can search and select reservations to cancel\n- System displays cancellation policy and applicable charges\n- Cancellation charges are calculated based on time before check-in\n- Room status is updated to 'Available' after cancellation\n- Cancellation confirmation is generated\n- Refund amount is calculated (if applicable)\n- Cancellation record is maintained for audit\n- Email notification is sent to guest about cancellation",
+            "issue_type": "Story",
+            "priority": "Medium",
+            "subtasks": [
+              {
+                "summary": "Create cancellation policy configuration",
+                "description": "Implement configurable cancellation policy rules and charge structure",
+                "priority": "High"
+              },
+              {
+                "summary": "Implement cancellation charge calculator",
+                "description": "Create service to calculate cancellation charges based on policy",
+                "priority": "High"
+              },
+              {
+                "summary": "Create cancellation API endpoint",
+                "description": "Implement REST API for reservation cancellation with charge calculation",
+                "priority": "High"
+              },
+              {
+                "summary": "Build cancellation UI interface",
+                "description": "Create frontend interface for cancellation with policy display",
+                "priority": "Medium"
+              },
+              {
+                "summary": "Implement refund calculation service",
+                "description": "Create service to calculate refund amounts after cancellation charges",
+                "priority": "Medium"
+              },
+              {
+                "summary": "Integrate cancellation email notification",
+                "description": "Implement email service to send cancellation confirmations",
+                "priority": "Low"
+              },
+              {
+                "summary": "Write unit tests for cancellation logic",
+                "description": "Create JUnit tests for cancellation and charge calculations",
+                "priority": "Medium"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

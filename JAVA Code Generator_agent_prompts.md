@@ -1,0 +1,52 @@
+# System Prompt:
+
+# Contract-First-Agent
+
+Contract-First-Agent
+
+## Primary Goal
+To merge an OpenAPI/Swagger specification with a Test Case document to generate the complete business logic in a single, optimized execution cycle, minimizing redundant tool calls.
+
+## What it can do
+Unified Context Processing: Ingest both the openapi.yaml and test_cases.md simultaneously to ensure the generated code satisfies both the technical contract and the business scenarios.
+
+Batch File Generation: Instead of creating files one by one, it generates a single shell script or multi-file command to scaffold the entire src/main/java and src/test/java directories in one terminal call.
+
+Strict Maven Layout: Every file must be generated with the explicit path prefix:
+
+src/main/java/[package_path]/ for production code.
+
+src/test/java/[package_path]/ for test suites.
+
+src/main/resources/ for properties and SQL scripts.
+
+Logic-to-Spec Mapping: Automatically map API endpoints to service layer methods, ensuring that request/response POJOs perfectly match the spec.
+
+Self-Contained Refactoring: Perform all logical checks internally before outputting the code, reducing the need for "fix-it" terminal iterations.
+
+Strict Maven Layout: Every file must be generated with the explicit path prefix:
+
+src/main/java/[package_path]/ for production code.
+
+src/test/java/[package_path]/ for test suites.
+
+src/main/resources/ for properties and SQL scripts.
+
+Database "Warm-Start":
+
+Auto-DDL: Configure application.properties with spring.jpa.hibernate.ddl-auto=create to build tables from @Entity classes automatically.
+
+Dummy Data: Generate a src/main/resources/data.sql file to insert initial records so the application isn't empty on launch.
+
+Add External dependency: Add dependency in pom.xml if using any external library like lombok,h2 etc.
+
+## What it cannot do
+Iterative Debugging: To save calls, it will not attempt to "guess" fixes if the first build fails; it will instead output a comprehensive error report for the user.
+
+Environment Configuration: It assumes the Java environment is already set up and does not call the terminal to check versions or install SDKs.
+
+
+ IMPORTANT: DO NOT generate any file outside `/app/temp/p5bdab87b-723c-4712-a297-5a1882c1cab9/dcab6140-b073-40fa-83b6-72c5a758ff3b/2b28dfb4-7efa-48d7-af3b-c7ec5e8d3d14` directory. Any newly created file from user instructions should be inside /app/temp/p5bdab87b-723c-4712-a297-5a1882c1cab9/dcab6140-b073-40fa-83b6-72c5a758ff3b/2b28dfb4-7efa-48d7-af3b-c7ec5e8d3d14/src folder.
+
+# User Query:
+Use the API Spec generated:  "# ✅ API Specification Successfully Generated from JIRA Stories!\n\nI have successfully transformed all **58 JIRA issues** from the Hotel Management System into a comprehensive **OpenAPI 3.0.3 API Specification**!\n\n---\n\n## 📊 API Specification Summary\n\n### 📁 Generated Files\n1. **hotel-management-api-spec.yaml** - Complete OpenAPI 3.0.3 specification\n2. **API_SPECIFICATION_SUMMARY.md** - Detailed documentation and mapping\n\n### 🎯 API Statistics\n- **Total Endpoints**: 17\n- **Resource Tags**: 6 (Authentication, Rooms, Reservations, Check-In/Check-Out, Billing, Cancellations)\n- **Data Schemas**: 13 comprehensive models\n- **Security**: JWT Bearer Authentication with RBAC\n- **HTTP Methods**: GET, POST\n- **Response Codes**: 200, 201, 400, 401, 404, 409, 500\n\n---\n\n## 🗺️ Complete Epic-to-Endpoint Mapping\n\n### 1️⃣ **HMS-EPIC-001: User Access and Authentication**\n- `POST /auth/login` - User authentication with JWT token\n- `POST /auth/logout` - Session invalidation\n\n### 2️⃣ **HMS-EPIC-002: Room Availability and Reservation Management**\n- `GET /rooms/availability` - Real-time room availability with filters\n- `GET /rooms/{roomId}` - Specific room details\n- `POST /reservations` - Create new reservation\n- `GET /reservations` - Search reservations\n- `GET /reservations/{confirmationNumber}` - Get reservation details\n\n### 3️⃣ **HMS-EPIC-003: Guest Check-In and Check-Out Operations**\n- `POST /check-in` - Process guest check-in\n- `POST /check-out` - Process guest check-out with billing\n\n### 4️⃣ **HMS-EPIC-004: Billing and Payment Management**\n- `GET /billing/{confirmationNumber}` - Get itemized bill\n- `POST /billing/{confirmationNumber}/calculate` - Calculate total charges\n- `POST /payments` - Record payment\n- `GET /payments/{confirmationNumber}` - Payment history\n\n### 5️⃣ **HMS-EPIC-005: Reservation Cancellation Management**\n- `POST /cancellations` - Cancel reservation with policy charges\n- `GET /cancellations/{cancellationId}` - Cancellation details\n\n---\n\n## ✨ Key Features Implemented\n\n### Business Rules ✅\n- ✅ Prevents double bookings (409 Conflict response)\n- ✅ Rooms under maintenance excluded from availability\n- ✅ Cannot check in before reservation start date\n- ✅ Standard check-out time 12:00 PM with late charges\n- ✅ Payment required before check-out completion\n- ✅ Policy-based cancellation charge calculation\n- ✅ All records retained for audit with timestamps\n\n### Technical Excellence ✅\n- ✅ OpenAPI 3.0.3 compliant specification\n- ✅ Complete request/response schemas with examples\n- ✅ Comprehensive error handling with custom codes\n- ✅ JWT Bearer authentication\n- ✅ Role-based authorization (ADMIN, FRONT_DESK_STAFF, MANAGER)\n- ✅ RESTful design best practices\n- ✅ ISO 8601 date/time formats\n- ✅ Ready for code generation (server stubs &amp; client SDKs)\n\n### Data Models (13 Schemas)\n1. **User** - Authentication and role management\n2. **Room** - Room details and status\n3. **RoomAvailability** - Availability with date ranges\n4. **Guest** - Guest information and ID proof\n5. **Reservation** - Complete reservation lifecycle\n6. **Charge** - Individual billing charges\n7. **Bill** - Itemized billing with totals\n8. **Payment** - Payment processing and receipts\n9. **Error** - Standardized error responses\n\n---\n\n## 🔐 Security Implementation\n\n- **Authentication**: JWT Bearer Token\n- **Authorization**: Role-Based Access Control (RBAC)\n- **Session Timeout**: 30 minutes\n- **Roles**: ADMIN, FRONT_DESK_STAFF, MANAGER\n- **Token Endpoint**: `/auth/login`\n\n---\n\n## 🎨 API Design Standards\n\n✅ **RESTful Principles**\n- Resource-based URLs (`/rooms`, `/reservations`, `/payments`)\n- Plural nouns for collections\n- Proper HTTP method usage\n\n✅ **Naming Conventions**\n- Endpoints: kebab-case (`/check-in`, `/check-out`)\n- Properties: camelCase (`confirmationNumber`, `checkInDate`)\n- Enums: UPPER_SNAKE_CASE (`CREDIT_CARD`, `FRONT_DESK_STAFF`)\n\n✅ **Data Formats**\n- Dates: `YYYY-MM-DD`\n- Timestamps: ISO 8601 with timezone (`2024-03-15T14:30:00Z`)\n- Currency: Double precision with 2 decimal places\n\n---\n\n## 🚀 Integration &amp; Usage\n\n### Swagger UI\n```bash\nswagger-ui-serve hotel-management-api-spec.yaml\n```\n\n### Postman Import\n1. Open Postman → Import → Upload Files\n2. Select `hotel-management-api-spec.yaml`\n3. Collection auto-generated with all 17 endpoints\n\n### Code Generation\n```bash\n# Generate Spring Boot server\nopenapi-generator-cli generate -i hotel-management-api-spec.yaml -g spring -o ./server\n\n# Generate Java client SDK\nopenapi-generator-cli generate -i hotel-management-api-spec.yaml -g java -o ./client\n```\n\n---\n\n## 📈 Coverage &amp; Traceability\n\n| Metric | Value |\n|--------|-------|\n| **JIRA Stories Mapped** | 9/9 (100%) |\n| **Epics Covered** | 5/5 (100%) |\n| **Business Rules** | All implemented |\n| **Acceptance Criteria** | All addressed |\n\n---\n\n## 🎯 Next Steps\n\n1. **Validate Specification**\n   ```bash\n   swagger-cli validate hotel-management-api-spec.yaml\n   ```\n\n2. **Generate Documentation**\n   - Import into Swagger UI for interactive docs\n   - Share with frontend and backend teams\n\n3. **Generate Code**\n   - Server stubs for Spring Boot\n   - Client SDKs for mobile/web apps\n\n4. **API Testing**\n   - Import into Postman\n   - Create test collections\n\n5. **Implementation**\n   - Use spec as contract for development\n   - Ensure API compliance\n\n---\n\n## 📦 Deliverables\n\n✅ **hotel-management-api-spec.yaml** - Production-ready OpenAPI 3.0.3 specification  \n✅ **API_SPECIFICATION_SUMMARY.md** - Comprehensive documentation with examples  \n\n---\n\n## 🎉 Success Summary\n\nThe API specification is **production-ready** and provides:\n- **17 RESTful endpoints** covering all business requirements\n- **13 data schemas** with complete validation rules\n- **JWT-based security** with role-based access control\n- **Comprehensive error handling** with custom error codes\n- **Full traceability** from JIRA stories to API endpoints\n- **100% coverage** of all 9 user stories and 5 epics\n\n**All 58 JIRA issues successfully transformed into a standardized, machine-readable API contract!** 🚀\n\nThe specification is ready for backend implementation, frontend integration, API testing, code generation, and documentation publishing!"    and Test case document :  "✅ **Test Case Document Generated Successfully**\n\nI have analyzed the Hotel Management System BRD and created a comprehensive test case document covering all functional requirements and business rules.\n\n## 📊 Document Summary:\n\n**Total Test Cases:** 52\n\n### Coverage Breakdown:\n\n**Functional Requirements:**\n- ✓ F-01: User Access (6 test cases)\n- ✓ F-02: Room Availability Management (6 test cases)\n- ✓ F-03: Room Reservation (6 test cases)\n- ✓ F-04: Availability Validation (6 test cases)\n- ✓ F-05: Check-In &amp; Check-Out (7 test cases)\n- ✓ F-06: Billing &amp; Payment (8 test cases)\n- ✓ F-07: Reservation Cancellation (7 test cases)\n- ✓ Business Rules (5 test cases)\n\n**Priority Distribution:**\n- P0 (Critical): 15 test cases\n- P1 (High): 29 test cases\n- P2 (Medium): 8 test cases\n\n**Test Types:**\n- Positive Tests: 30\n- Negative Tests: 22\n- Smoke Tests: 7\n\n### 🎯 Key Features:\n\n✅ Complete requirement traceability\n✅ Detailed pre-conditions and post-conditions\n✅ Step-by-step test execution instructions\n✅ Expected results for each scenario\n✅ Edge cases and error handling\n✅ Business rule validation\n✅ Traceability matrix included\n\n**File saved at:** `Test_Cases_Hotel_Management_System.md`\n\nThe document is ready for review and can be used by the QA team for test execution!"    and write an optimized code in spring boot and add the dependencies to the pom.xml
