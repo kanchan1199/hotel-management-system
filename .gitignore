@@ -42,3 +42,4 @@ Thumbs.db
 # Application
 application-local.properties
 application-dev.properties
+log.stream
