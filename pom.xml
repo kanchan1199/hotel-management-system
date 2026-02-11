@@ -16,7 +16,7 @@
     <artifactId>hotel-management-system</artifactId>
     <version>1.0.0</version>
     <name>Hotel Management System</name>
-    <description>Hotel Operations Digitalization - Room Booking & Reservation Module</description>
+    <description>Hotel Operations Digitalization - Room Booking Reservation Module</description>
 
     <properties>
         <java.version>17</java.version>
